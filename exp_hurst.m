@@ -1,7 +1,7 @@
 % Importando dados
 clear
 
-petro = readtable("PETR4.SA.csv","ReadVariableNames",false);
+petro = readtable("./data/PETR4.SA.csv","ReadVariableNames",false)
 % Filtrando os valores para somente o preço de fechamento
 petro = table2array(petro(:,5));
 

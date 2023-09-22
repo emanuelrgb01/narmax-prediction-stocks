@@ -1,9 +1,9 @@
 function [P_petro,P_vale,P_embr,T_petro,T_vale,T_embr] = matrizes()
     % Importando dados
     
-    petro = readtable("PETR4.SA.csv","ReadVariableNames",false);
-    vale = readtable("VALE3.SA.csv","ReadVariableNames",false);
-    embr = readtable("EMBR3.SA.csv","ReadVariableNames",false);
+    petro = readtable("./data/PETR4.SA.csv","ReadVariableNames",false);
+    vale = readtable("./data/VALE3.SA.csv","ReadVariableNames",false);
+    embr = readtable("./data/EMBR3.SA.csv","ReadVariableNames",false);
     
     % Filtrando os valores para somente o preço de fechamento
     petro = table2array(petro(:,5));
