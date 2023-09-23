@@ -6,22 +6,22 @@ function [P_petro,P_vale,P_embr,T_petro,T_vale,T_embr] = matriz_2anos()
     
     % Filtrando os valores para somente o preço de fechamento
     % Filtrando também somente para os dois ultimos anos
-    petro = table2array(petro(481:990,5));
-    vale = table2array(vale(481:990,5));
-    embr = table2array(embr(481:990,5));
+    petro = table2array(petro(501:990,5));
+    vale = table2array(vale(501:990,5));
+    embr = table2array(embr(501:990,5));
     
     % Matrizes de entrada e treinamento
-    P_petro = zeros(30,42);
-    P_vale = zeros(30,42);
-    P_embr = zeros(30,42);
+    P_petro = zeros(30,40);
+    P_vale = zeros(30,40);
+    P_embr = zeros(30,40);
     
-    T_petro = zeros(10,42);
-    T_vale = zeros(10,42);
-    T_embr = zeros(10,42);
+    T_petro = zeros(10,40);
+    T_vale = zeros(10,40);
+    T_embr = zeros(10,40);
     
     %% Matrizes de entrada e treinamento para as tres redes neurais
     % Sao usados somente os 900 primeiros precos das acoes
-    for i = 1:42
+    for i = 1:40
         % Matriz de entrada rede PETRO
         % Dez primeiras linhas com precos de petro
         % Linhas 11-20 com precos vale
