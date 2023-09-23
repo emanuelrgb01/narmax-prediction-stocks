@@ -65,7 +65,7 @@ net_petro.trainParam.lr = 0.2;
 net_petro.trainParam.min_grad = 10^-15;
 net_petro.trainParam.max_fail = 1000;
 
-[net_petro, tr] = train(net_petro,P_petro,T_petro)
+[net_petro, tr_petro] = train(net_petro,P_petro,T_petro)
 
 %%
 % Rede vale
@@ -81,7 +81,7 @@ net_vale.trainParam.lr = 0.2;
 net_vale.trainParam.min_grad = 10^-15;
 net_vale.trainParam.max_fail = 1000;
 
-[net_vale, tr] = train(net_vale,P_vale,T_vale)
+[net_vale, tr_vale] = train(net_vale,P_vale,T_vale)
 
 %%
 % Rede embr
@@ -97,9 +97,21 @@ net_vale.trainParam.lr = 0.2;
 net_vale.trainParam.min_grad = 10^-15;
 net_vale.trainParam.max_fail = 1000;
 
-[net_vale, tr] = train(net_vale,P_vale,T_vale)
+[net_embr, tr_embr] = train(net_embr,P_embr,T_embr)
 
+%% Performance
 
+%plotperf(tr_petro)
+%plotperf(tr_vale)
+%plotperf(tr_embr)
 
+%% Teste
+[Treino_petro,Teste_petro] = treino_teste_petrobras();
+
+xTreino = 1:1:length(Treino_petro);
+xTeste = (length(Treino_petro)+1):1:(length(Treino_petro)+length(Teste_petro));
+
+plot(xTreino, Treino_petro,'b',xTeste,Teste_petro,'r')
+hold on
 
 
