@@ -1,7 +1,7 @@
 % Importando dados
 clear
 
-petro = readtable("./data/PETR4.SA.csv","ReadVariableNames",false)
+petro = readtable("./data/PETR4.SA.csv","ReadVariableNames",false);
 % Filtrando os valores para somente o preço de fechamento
 petro = table2array(petro(:,5));
 
@@ -58,7 +58,7 @@ plot(linear_model)
 hold on 
 ylabel('Log2(R/S)');
 xlabel('Log2(k)');
-title('');
+title('Expoente de Hurst');
 
 hold off
 
