@@ -106,12 +106,24 @@ net_vale.trainParam.max_fail = 1000;
 %plotperf(tr_embr)
 
 %% Teste
-[Treino_petro,Teste_petro] = treino_teste_petrobras();
+verificacao_Petro_passado = [];
+for i = 1:39
+    aux = net_petro(P_petro(:,i));
+    verificacao_Petro_passado = [verificacao_Petro_passado; aux];
+end
 
-xTreino = 1:1:length(Treino_petro);
-xTeste = (length(Treino_petro)+1):1:(length(Treino_petro)+length(Teste_petro));
+verificacao_Petro_predicao =  [net_petro(P_petro(:,40))];
+dados_teste_petro = [T_petro; T_vale; T_embr];
 
-plot(xTreino, Treino_petro,'b',xTeste,Teste_petro,'r')
+for i = 1:8
+    aux = net_petro(dados_teste_petro(:,i));
+    verificacao_Petro_predicao = [verificacao_Petro_predicao; aux];
+end
+
+[Treino_petro,Teste_petro,Treino_embr,Teste_embr,Treino_vale,Teste_vale] = treino_teste();
+
 hold on
-
+plot(1:1:400, Treino_petro,color='#00498A')
+plot(401:1:490,Teste_petro,color='#26A608')
+plot(11:1:400, verificacao_Petro_passado,401:1:490, verificacao_Petro_predicao,color='#CD1818')
 
