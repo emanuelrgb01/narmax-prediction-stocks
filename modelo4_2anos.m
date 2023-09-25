@@ -139,5 +139,5 @@ plot(401:1:10*fim_previsao,petro_previsao,'r') % Precos previstos pretro
 
 hold on
 plot(1:1:400, Treino_petro,color='#00498A') % Precos reais da petro
-plot(401:1:490,Teste_petro,color='black') % Precos reais da petro
+plot(401:1:10*fim_previsao,Teste_petro(1:(fim_previsao-40)*10),color='black') % Precos reais da petro
 hold off
