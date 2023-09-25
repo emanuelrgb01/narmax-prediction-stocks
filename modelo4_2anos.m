@@ -116,7 +116,7 @@ petro_previsao = [];
 % Inicio da previsao
 % O valor final da previsao deve ser no máximo o limite de colunas dos
 % precos. Para 2 anos é de 49
-fim_previsao = 46;
+fim_previsao = 49-3;
 
 % Iniciando a simulacao com os precos iniciais
 precos_previsao = [precos_previsao,P_petro(:,40)];

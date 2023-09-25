@@ -112,28 +112,38 @@ net_vale.trainParam.max_fail = 1000;
 %plotperf(tr_embr)
 
 %% Teste
-verificacao_Petro_passado = [];
-for i = 1:39
-    aux = net_petro(P_petro(:,i));
-    verificacao_Petro_passado = [verificacao_Petro_passado; aux];
-end
-
-verificacao_Petro_predicao =  [net_petro(P_petro(:,40))];
-dados_teste_petro = [T_petro; T_vale; T_embr];
-
-for i = 1:8
-    aux = net_petro(dados_teste_petro(:,i));
-    verificacao_Petro_predicao = [verificacao_Petro_predicao; aux];
-end
-
+% Valores das cotacoes reais para serem comparados
 [Treino_petro,Teste_petro,Treino_embr,Teste_embr,Treino_vale,Teste_vale] = treino_teste();
 
+% Previsão dos precos de todas as acoes usando as tres redes neurais
+precos_previsao = [];
+petro_previsao = [];
+
+% Inicio da previsao
+% O valor final da previsao deve ser no máximo o limite de colunas dos
+% precos. Para 2 anos é de 49
+fim_previsao = 49-3;
+
+% Iniciando a simulacao com os precos iniciais
+precos_previsao = [precos_previsao,P_petro(:,40)];
+petro_previsao = [petro_previsao;P_petro(1:10,40)];
+
+% Precos previstos
+for i=1:fim_previsao-41
+
+    % Previsao dos precos usando as tres redes neurais
+    precos_previsao(1:10,i+1) = net_petro(precos_previsao(:,i));
+    precos_previsao(11:20,i+1) = net_vale(precos_previsao(:,i));
+    precos_previsao(21:30,i+1) = net_embr(precos_previsao(:,i));
+
+    % Previsao do preco da petro
+    petro_previsao = [petro_previsao;precos_previsao(1:10,i+1)];
+end
+
+% Gráfico teste
+plot(401:1:10*fim_previsao,petro_previsao,'r') % Precos previstos pretro
+
 hold on
-plot(1:1:400, Treino_petro,color='#00498A')
-plot(401:1:490,Teste_petro,color='#26A608')
-plot(11:1:400, verificacao_Petro_passado,401:1:490,verificacao_Petro_predicao,color='#CD1818')
-
-xlabel('Dia')
-ylabel('Preço PETR4')
-
+plot(1:1:400, Treino_petro,color='#00498A') % Precos reais da petro
+plot(401:1:10*fim_previsao,Teste_petro(1:(fim_previsao-40)*10),color='black') % Precos reais da petro
 hold off
