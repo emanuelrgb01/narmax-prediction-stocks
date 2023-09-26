@@ -61,7 +61,7 @@ net_petro.layers{2}.transferFcn = 'poslin'; % poslin = ReLU
 net_petro.layers{3}.transferFcn = 'purelin';
 net_petro.performFcn = 'mse';
 net_petro.trainFcn = 'trainrp';
-net_petro.trainParam.epochs = 10000;
+net_petro.trainParam.epochs = 50000;
 net_petro.trainParam.time = 1200;
 net_petro.trainParam.lr = 0.075;
 net_petro.trainParam.min_grad = 10^-15;
@@ -72,14 +72,14 @@ net_petro.trainParam.max_fail = 1000;
 %%
 % Rede vale
 net_vale.trainParam.showWindow = true;
-net_petro.layers{1}.dimensions = 20;
-net_petro.layers{1}.transferFcn = 'poslin'; % poslin = ReLU
-net_petro.layers{2}.dimensions = 20;
-net_petro.layers{2}.transferFcn = 'poslin'; % poslin = ReLU
-net_petro.layers{3}.transferFcn = 'purelin';
+net_vale.layers{1}.dimensions = 20;
+net_vale.layers{1}.transferFcn = 'poslin'; % poslin = ReLU
+net_vale.layers{2}.dimensions = 20;
+net_vale.layers{2}.transferFcn = 'poslin'; % poslin = ReLU
+net_vale.layers{3}.transferFcn = 'purelin';
 net_vale.performFcn = 'mse';
 net_vale.trainFcn = 'trainrp';
-net_vale.trainParam.epochs = 10000;
+net_vale.trainParam.epochs = 50000;
 net_vale.trainParam.time = 1200;
 net_vale.trainParam.lr = 0.075;
 net_vale.trainParam.min_grad = 10^-15;
@@ -89,19 +89,19 @@ net_vale.trainParam.max_fail = 1000;
 
 %%
 % Rede embr
-net_vale.trainParam.showWindow = true;
-net_petro.layers{1}.dimensions = 20;
-net_petro.layers{1}.transferFcn = 'poslin'; % poslin = ReLU
-net_petro.layers{2}.dimensions = 20;
-net_petro.layers{2}.transferFcn = 'poslin'; % poslin = ReLU
-net_petro.layers{3}.transferFcn = 'purelin';
-net_vale.performFcn = 'mse';
-net_vale.trainFcn = 'trainrp';
-net_vale.trainParam.epochs = 10000;
-net_vale.trainParam.time = 1200;
-net_vale.trainParam.lr = 0.075;
-net_vale.trainParam.min_grad = 10^-15;
-net_vale.trainParam.max_fail = 1000;
+net_embr.trainParam.showWindow = true;
+net_embr.layers{1}.dimensions = 20;
+net_embr.layers{1}.transferFcn = 'poslin'; % poslin = ReLU
+net_embr.layers{2}.dimensions = 20;
+net_embr.layers{2}.transferFcn = 'poslin'; % poslin = ReLU
+net_embr.layers{3}.transferFcn = 'purelin';
+net_embr.performFcn = 'mse';
+net_embr.trainFcn = 'trainrp';
+net_embr.trainParam.epochs = 50000;
+net_embr.trainParam.time = 1200;
+net_embr.trainParam.lr = 0.075;
+net_embr.trainParam.min_grad = 10^-15;
+net_embr.trainParam.max_fail = 1000;
 
 [net_embr, tr_embr] = train(net_embr,P_embr,T_embr)
 
@@ -122,7 +122,7 @@ petro_previsao = [];
 % Inicio da previsao
 % O valor final da previsao deve ser no máximo o limite de colunas dos
 % precos. Para 2 anos é de 49
-fim_previsao = 49-5;
+fim_previsao = 49-3;
 
 % Iniciando a simulacao com os precos iniciais
 precos_previsao = [precos_previsao,P_petro(:,40)];
